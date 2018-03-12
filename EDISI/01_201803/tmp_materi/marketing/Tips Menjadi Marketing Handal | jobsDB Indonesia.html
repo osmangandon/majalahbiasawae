@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7 jobseeker-site country-id lang-id  mod-resources">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 jobseeker-site country-id lang-id  mod-resources" xmlns:fb="http://ogp.me/ns/fb#">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html class="jobseeker-site country-id lang-id  mod-resources" xmlns:fb="http://ogp.me/ns/fb#">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<script type="text/javascript">
+    var IsInPopupPage = false;
+	var IsIframe = false;
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+    var debugMode = false;
+    window.jobsDB = {};
+
+    // Path related variables
+    var virtualDir = '/ID/ID/';
+    var javascriptUrlBase = 'https://id.content.jobsdbcdn.com/Content/v322/Javascript/';
+    var javascriptUrlBaseList = ["https://id.content.jobsdbcdn.com/Content/v322/Javascript/"];
+    var cssUrlBase = 'https://id.content.jobsdbcdn.com/Content/v322/SSL/Css/';
+    var imagesUrlBase = 'https://id.content.jobsdbcdn.com/Content/v322/Images/';
+    var attachmentUrlBase = ["","id","Content","v322","Temp",""].join('/');
+    var g_currentSite = 'https://id.jobsdb.com/ID/id';
+    var g_dotComDomain = 'id.jobsdb.com';
+    var g_analysisDomain = 'analysis.jobsdb.co.id';
+    var g_countryCode = 'ID';
+    var g_languageCode = 'ID';
+    var g_local_CSHotline = "+62 21 3002 8899";
+    var g_local_Email = "CS@jobsDB.co.id";    
+
+    //TODO: this is not a real serverTime, however server side validation should catch if input date is invalid (such as out of bound)
+    var serverTime = new Date();
+
+    var jsLoginFlag = false;
+    var empLoginFlag = false;
+    
+    // get Employer Ticket and ID
+    var getAuthenEmpTicketKey = 'EMP_authenTicket';
+    var getAuthenEmpAccountInfoKey = 'EmpAccInfo';
+    
+    // get JobSeeker Ticket and ID
+    var getAuthenJsTicketKey = 'JS_authenTicket_XX';
+    var getAuthenUserJsIdKey = 'JS_authenUserId';
+    var getAuthenJsAccountInfoKey = 'JsAccInfo_XX';
+
+    // User Name
+    var userName; 
+
+    // Form framework related variables
+    var loadedJsList= ["JobsDB.combined.min.js","JobsDB.form.min.js","JobsDB_System_ControllerResponseConversion.js"];
+    var isPageLoaded = false; // Set to true in $(document).ready()
+    var pageOnLoadActionList = new Array(); // Dispatched in $(document).ready()
+    
+    var commonBodyStartConfirmation = "Konfirmasi";
+    var ajaxErrorMessage = "Coba lagi kemudian ";
+    
+    
+
+    var jsLoginControllerResponse = {"Type":0,"CountryCode":"","LanguageCode":"","Webflow":6,"ActionUrl":"","WebflowAction":2,"JsonData":"","JsonNotificationData":null,"JsonErrorData":null,"Description":"No Description.","EvalScript":null,"NextControllerResponeseDelayTime":0,"NextControllerResponese":"{\"Type\":0,\"CountryCode\":\"\",\"LanguageCode\":\"\",\"Webflow\":0,\"ActionUrl\":null,\"WebflowAction\":0,\"JsonData\":null,\"JsonNotificationData\":null,\"JsonErrorData\":null,\"Description\":\"No Description.\",\"EvalScript\":\"JobsDB_System_Messaging.PublishEvent%28%27Login.SetupSource%27%2C%20%22Others%22%2C%20%27local%27%29%3B\",\"NextControllerResponeseDelayTime\":0,\"NextControllerResponese\":null,\"IsBlocked\":false,\"Target\":0,\"UnBlockingEvent\":0,\"ContainerWidth\":-1,\"ContainerHeight\":-1,\"IsAlwaysPost\":false,\"IsNormalMemberFristLogin\":false}","IsBlocked":false,"Target":0,"UnBlockingEvent":0,"ContainerWidth":-1,"ContainerHeight":-1,"IsAlwaysPost":false,"IsNormalMemberFristLogin":false}
+    jsLoginControllerResponse.ActionUrl = [null,'Login','RevampedLoginBoxForJobSeeker'].join('/');
+
+    var jsLoginForFullAccessControllerResponse = {"Type":0,"CountryCode":"","LanguageCode":"","Webflow":6,"ActionUrl":"","WebflowAction":2,"JsonData":"","JsonNotificationData":null,"JsonErrorData":null,"Description":"No Description.","EvalScript":null,"NextControllerResponeseDelayTime":0,"NextControllerResponese":"{\"Type\":0,\"CountryCode\":\"\",\"LanguageCode\":\"\",\"Webflow\":0,\"ActionUrl\":null,\"WebflowAction\":0,\"JsonData\":null,\"JsonNotificationData\":null,\"JsonErrorData\":null,\"Description\":\"No Description.\",\"EvalScript\":\"JobsDB_System_Messaging.PublishEvent%28%27Login.SetupSource%27%2C%20%22Others%22%2C%20%27local%27%29%3B\",\"NextControllerResponeseDelayTime\":0,\"NextControllerResponese\":null,\"IsBlocked\":false,\"Target\":0,\"UnBlockingEvent\":0,\"ContainerWidth\":-1,\"ContainerHeight\":-1,\"IsAlwaysPost\":false,\"IsNormalMemberFristLogin\":false}","IsBlocked":false,"Target":0,"UnBlockingEvent":0,"ContainerWidth":-1,"ContainerHeight":-1,"IsAlwaysPost":false,"IsNormalMemberFristLogin":false}
+    jsLoginForFullAccessControllerResponse.ActionUrl = [null,'Login','LoginForFullAccessLoginBox'].join('/');
+    
+    var empLoginControllerResponse = {"Type":0,"CountryCode":"","LanguageCode":"","Webflow":0,"ActionUrl":"","WebflowAction":2,"JsonData":"Employer","JsonNotificationData":null,"JsonErrorData":null,"Description":"No Description.","EvalScript":null,"NextControllerResponeseDelayTime":0,"NextControllerResponese":null,"IsBlocked":false,"Target":0,"UnBlockingEvent":0,"ContainerWidth":-1,"ContainerHeight":-1,"IsAlwaysPost":false,"IsNormalMemberFristLogin":false}
+    empLoginControllerResponse.ActionUrl = [null,'Login','EmployerLogin'].join('/');
+   
+    var webflow_fallbackToCountry = "";
+    
+    var isInRevampedPage = false;
+    var currentWebFlowName = "MainPage";
+
+ //]]>
+</script>
+
+            <script src="https://id.content.jobsdbcdn.com/Content/v322/Javascript/JobsDB.combined.min.js" type="text/javascript"></script>
+        
+            <script src="https://id.content.jobsdbcdn.com/Content/v322/Javascript/JobsDB.form.min.js" type="text/javascript"></script>
+        
+            <script src="https://id.content.jobsdbcdn.com/Content/v322/Javascript/JobsDB_System_ControllerResponseConversion.js" type="text/javascript"></script>
+        
+        
+        <script type="text/javascript">
+            //<![CDATA[
+            if (JobsDB_Common.IsIPad()) {
+                JobsDB_System.IncludeJs("iscroll.js");
+            }
+
+            // Allow us to recover the thickbox as well as the main page.
+            var lastThickboxControllerResponse = null;
+
+            $.ajaxSetup({
+                cache: false,
+                async: false,
+                type: "GET"
+            });
+
+            JobsDB_System_Authentication.RefreshGlobalLoginFlag();
+
+            $.dBoxBlockUIMessage = '<div id="JDBLoading"><center><img src="https://id.content.jobsdbcdn.com/Content/v322/Images/shared/loading.gif"/></center></div>';
+
+            $(document).ready(function() {
+                $('#globalConfirm').dBox();
+
+                isPageLoaded = true;
+                JobsDB_System.Dispatch(pageOnLoadActionList);
+
+                if (JobsDB_Common.IsIOS()) {
+                    $("body").addClass("iOS");
+                }
+            });
+
+            $(window).unload(function() {
+                JobsDB_System.AbortAllAjax();
+            });
+
+            function RefreshHeaderLoginDisplay() {
+                userName = JobsDB_System_Authentication.GetJsUserName();
+                if (userName != null && userName.length > 0) {
+                    $('#label_SSOUserName').html(JobsDB_System.HtmlEncode(userName));
+                    $('.label_SSOUserName').html(JobsDB_System.HtmlEncode(userName));
+                    $("#HeaderLoginedArea").show();
+                    $("#HeaderLoginArea").hide();
+                    $("body").removeClass("logged-out").addClass("logged-in");
+
+                    try
+                    {
+                        var title = localStorage.getItem('JsLatestPosition');
+                        if(title && title.length > 0)
+                        {
+                            $("#js-site-header").find(".JSLatestJobTitle").text(title).show();
+                        }
+                    }
+                    catch(err)
+                    {
+                    }  
+
+                }
+                else {
+                    $("body").addClass("logged-out").removeClass("logged-in");
+                    $("#HeaderLoginedArea").hide();
+                    $("#HeaderLoginArea").show();
+                }
+            }
+            //]]> 
+</script>
+        
+    
+<link rel="SHORTCUT ICON" href="https://id.content.jobsdbcdn.com/Content/v322/Images/shared/v8revamp2/favicon.ico" />
+<link href="https://id.content.jobsdbcdn.com/Content/v322/SSL/Css/minEffect.css" rel="stylesheet" type="text/css" media="all" />
+<link href="https://id.content.jobsdbcdn.com/Content/v322/SSL/Css/minJs_Revamp2_reset.css" rel="stylesheet" type="text/css" media="all" />
+<link href="https://id.content.jobsdbcdn.com/Content/v322/SSL/Css/minJs_Revamp2_global.css" rel="stylesheet" type="text/css" media="all" />
+<!--[if lt IE 9]>
+<link href="https://id.content.jobsdbcdn.com/Content/v322/SSL/Css/minHeader_desk.css" rel="stylesheet" type="text/css" media="all" />
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<link href="https://id.content.jobsdbcdn.com/Content/v322/SSL/Css/minHeader_rwd.css" rel="stylesheet" type="text/css" media="all" />
+<!--<![endif]--> 
+
+<!--[if lt IE 9]>
+<script src="https://id.jobsdb.com/id-id/wp-content/themes/jobsdb/js/html5fix.min.js" type="text/javascript"></script>
+<![endif]-->
+<meta property="og:image" content="https://id.content.jobsdbcdn.com/id-id/wp-content/uploads/sites/3/2014/07/Tips-Menjadi-Marketing-Handal-300x137.png"/>
+<title>Tips Menjadi Marketing Handal | jobsDB Indonesia</title>
+<meta name="description" content="Pernahkah terbayang menjadi seorang marketing? Apa yang dilakukan marketer untuk memasarkan sebuah brand? Simak tips menjadi marketing handal berikut ini!"/>
+<meta name="keywords" content="rencana karir, pengembangan karir, tips karir, tips kerja,"/>
+<link rel="canonical" href="https://id.jobsdb.com/id-id/articles/tips-menjadi-seorang-marketing-yang-handal" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Tips Menjadi Marketing Handal | jobsDB Indonesia" />
+<meta property="og:description" content="Pernahkah terbayang menjadi seorang marketing? Apa yang dilakukan marketer untuk memasarkan sebuah brand? Simak tips menjadi marketing handal berikut ini!" />
+<meta property="og:url" content="https://id.jobsdb.com/id-id/articles/tips-menjadi-seorang-marketing-yang-handal" />
+<meta property="og:site_name" content="jobsDB Indonesia" />
+<meta property="article:tag" content="Dunia Kerja" />
+<meta property="article:tag" content="fokus industri" />
+<meta property="article:tag" content="Marketing Communication" />
+<meta property="article:tag" content="tips karir" />
+<meta property="article:section" content="Pemasaran &amp; Humas" />
+<meta property="article:published_time" content="2014-07-30T08:29:29+00:00" />
+<meta property="article:modified_time" content="2015-09-18T17:14:30+00:00" />
+<meta property="og:updated_time" content="2015-09-18T17:14:30+00:00" />
+<meta property="og:image" content="https://id.content.jobsdbcdn.com/id-id/wp-content/uploads/sites/3/2014/07/Tips-Menjadi-Marketing-Handal.png" />
+<meta property="og:image" content="http://id.jobsdb.com/id-id/wp-content/uploads/sites/3/2014/07/Tips-Menjadi-Marketing-Handal.png" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:domain" content="jobsDB Indonesia"/>
+<link rel='stylesheet' id='hupso_css-css'  href='https://id.content.jobsdbcdn.com/id-id/wp-content/plugins/hupso-share-buttons-for-twitter-facebook-google/style.css?ver=3.9' type='text/css' media='all' />
+<link rel='stylesheet' id='wpProQuiz_front_style-css'  href='https://id.content.jobsdbcdn.com/id-id/wp-content/plugins/wp-pro-quiz/css/wpProQuiz_front.min.css?ver=0.36' type='text/css' media='all' />
+<link rel='stylesheet' id='jobsdb-style-css'  href='https://id.content.jobsdbcdn.com/id-id/wp-content/themes/jobsdb/style.css?ver=20180306' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='jobsdb-ie-css'  href='https://id.content.jobsdbcdn.com/id-id/wp-content/themes/jobsdb/css/ie.css?ver=20180306' type='text/css' media='all' />
+<![endif]-->
+<meta property="fb:admins" content="100004356105141" />
+
+<meta name="referrer" content="origin" />
+</head>
+<body class="single single-post postid-31 single-format-standard db16  single-author">
+<div class="page-body content-page">
+
+<header class="db16-header navbar navbar-default-candi" role="banner" id="js-site-header" data-bootstrap="false">
+    <div class="container">
+      <div class="navbar-header">
+        
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
+          <span class="sr-only">&nbsp;</span>
+          <strong>&#9776;</strong> Menu
+        </button>
+        
+        <a class="navbar-brand-logo" href="https://id.jobsdb.com/id">jobsDB</a>
+	  </div>
+      
+      <nav class="collapse navbar-collapse" id="main-nav">
+        <ul class="nav navbar-nav navbar-switchers">
+          <li class="dropdown dropdown-country">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="flag-icon flag-icon-id"></span>
+              <span class="flag-label">Indonesia</span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu multi-level dropdown-menu-fancy with-header" aria-labelledby="countries">
+				<li>Ubah Negara</li>
+				
+				<li class="">
+					<a data-country="HK" href="https://hk.jobsdb.com/hk" onclick="ChangeCountry('HK',''); return false;"><span class="flag-icon flag-icon-hk"></span>Hong Kong</a>
+				</li>
+				
+				<li class="active">
+					<a data-country="ID" href="https://id.jobsdb.com/id" onclick="ChangeCountry('ID',''); return false;"><span class="flag-icon flag-icon-id"></span>Indonesia</a>
+				</li>
+				
+				<li class="">
+					<a data-country="SG" href="https://sg.jobsdb.com/sg" onclick="ChangeCountry('SG',''); return false;"><span class="flag-icon flag-icon-sg"></span>Singapura</a>
+				</li>
+				
+				<li class="">
+					<a data-country="TH" href="https://th.jobsdb.com/th" onclick="ChangeCountry('TH',''); return false;"><span class="flag-icon flag-icon-th"></span>Thailand</a>
+				</li>
+				                        
+			</ul>
+          </li>
+		  <li class="switch-language "><a class="active navbar-link" href="https://id.jobsdb.com/id" onClick="$.cookie(&#39;DefaultLang&#39;, &#39;en&#39;,{ path:&#39;/&#39;, expires: 3650});$.cookie(&#39;AcknowledgedLangSwitcher&#39;,&#39;AcknowledgedLangSwitcher&#39;,{ path:&#39;/&#39;, expires: 3650});">English</a></li><li class="switch-language active"><a class="navbar-link" href="https://id.jobsdb.com/id/id" onClick="$.cookie(&#39;DefaultLang&#39;, &#39;id&#39;,{ path:&#39;/&#39;, expires: 3650});$.cookie(&#39;AcknowledgedLangSwitcher&#39;,&#39;AcknowledgedLangSwitcher&#39;,{ path:&#39;/&#39;, expires: 3650});">Bahasa</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right navbar-anonymous">
+          <li class="dropdown-menu-download-app">
+            <a class="appDownloadLink">Unduh aplikasi</a>
+          </li>
+          <li class="dropdown-menu-search">
+            <a href="https://id.jobsdb.com/id">Cari pekerjaan</a>
+          </li>
+          <li class="dropdown-menu-resources">
+            <a href="/id-id/career-recruitment-advice/">Tips Dunia Kerja</a>
+          </li>
+          
+          <li class="dropdown-menu-login">
+            <a href="https://id.jobsdb.com/id/id/login/jobseekerlogin" class="navbar-link" id="Head_Login">Masuk</a>
+          </li>
+          <li class="dropdown-menu-create-profile">
+            <a href="https://id.jobsdb.com/id/id/jobseeker/registration" class="btn btn-cta" id="JobSeekerRegistrationLink">Daftar</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right navbar-universal-login">
+          <li>
+              
+              		<a class="btn btn-default fn-header-emplogin" href="https://id.jobsdb.com/id/id/home/employerindex">Situs perusahaan</a> 
+              		
+              		<a class="btn btn-primary fn-header-canlogin" href="https://id.jobsdb.com/id/id/login/jobseekerlogin">Masuk</a> 
+              		<a class="btn btn-primary fn-header-canreg" href="https://id.jobsdb.com/id/id/jobseeker/registration">Daftar</a>
+              
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right navbar-user">
+          <li class="dropdown dropdown-owner">
+            <a href="#" class="dropdown-toggle profile-owner-container" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="profile-owner invitation-indicator">
+                <strong id="label_SSOUserName"></strong>
+                <small class="text-muted JSLatestJobTitle"></small>
+              </span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-menu-profile profile-in hidden-xs">
+                <a href="https://id.jobsdb.com/id/id/MyJobsDB/profile">
+                  <ins class="icon-profile"></ins> Lihat profil</a>
+              </li>
+              <li class="dropdown-menu-invitation profile-in hidden-xs">
+                <a class="JsInvitationCount" href="https://id.jobsdb.com/id/id/Invitations/InvitationList" data-when-empty="Tidak pangilan Pekerjaan" data-has-invitation="{0} Panggilan Kerja" data-template="<ins class='icon-invitation invitation-indicator'></ins>"></a>
+              </li>
+              <li class="dropdown-menu-myjobsdb profile-in hidden-xs">
+                <a href="https://id.jobsdb.com/id/id/MyJobsDB"><ins class="icon-myjobsdb"></ins> My jobsDB</a>
+              </li>
+               <li class="dropdown-menu-download-app">
+                <a class="appDownloadLink">Unduh aplikasi</a>
+              </li>
+              <li class="dropdown-menu-search">
+                <a href="https://id.jobsdb.com/id">Cari pekerjaan</a>
+              </li>
+              <li class="dropdown-menu-resources">
+                <a href="/id-id/career-recruitment-advice/">Tips Dunia Kerja</a>
+              </li>
+              
+              <li class="dropdown-menu-login profile-out"><a href="https://id.jobsdb.com/id/id/login/jobseekerlogin" title="Login">Masuk</a></li>
+              <li class="dropdown-menu-logout profile-in"><a id="HeaderLogOffLink" title="Logout" href="javascript:;">Keluar</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    
+    </div>
+    <script type="text/javascript">
+        try {
+            (function(){
+                if (document.cookie && document.cookie != '' && document.cookie.indexOf(getAuthenJsAccountInfoKey) > -1) {
+                    var cookies = document.cookie.substring(document.cookie.indexOf(getAuthenJsAccountInfoKey)).split(';')
+                    var user = cookies[0].split('=');
+                    var userObj = JSON.parse(decodeURIComponent(user[1]));
+                    document.querySelector("#label_SSOUserName").innerHTML = userObj.Name;
+                    document.querySelector("body").className += " logged-in";
+                    var title = localStorage.getItem('JsLatestPosition');
+                    if (title && title.length > 0) {
+                        document.querySelector("#js-site-header .JSLatestJobTitle").innerHTML = title;
+                    }                    
+                }
+                else
+                {
+                    document.querySelector("body").className += " logged-out";
+                }
+            })();
+        }
+        catch (e) { console.log(e);  }
+    </script>
+  </header>
+<div class="menu db16-menu hidden-xs">
+    <div class="container">
+        <nav class="navbar navbar-default" role="navigation" id="topmenu">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            
+              <span class="n-home active">
+                  
+                <a class="navbar-brand" href="https://id.jobsdb.com/id/id/Home" onclick='return TriggerSetWindowLocation("https://id.jobsdb.com/id/id/Home");' title="Beranda">Beranda</a>
+                </span>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav candi">
+            
+                <li class="n-myjobsdb ">
+                    
+                    <a href="https://id.jobsdb.com/id/id/MyJobsDB" onclick='window.location="https://id.jobsdb.com/id/id/MyJobsDB";return false;' title="My jobsDB">My jobsDB</a>
+                    
+                </li>
+            
+                <li class="n-resources ">
+                    
+                    <a href="/id-id/career-recruitment-advice/" onclick='window.location="/id-id/career-recruitment-advice/";return false;' title="Tips Dunia Kerja">Tips Dunia Kerja</a>
+                    
+                </li>
+            
+                <li class="n-learning ">
+                    
+                    <a href="https://id.jobsdb.com/id-id/pages/event" onclick='window.location="https://id.jobsdb.com/id-id/pages/event";return false;' title="Event">Event</a>
+                    
+                </li>
+            
+            </ul>
+            
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- #masthead -->
+	<div id="page" class="hfeed site">
+		<header id="masthead" class="site-header" role="banner">
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+						<div class="menu-menu-1-container"><ul id="menu-menu-1" class="nav-menu"><li id="menu-item-20" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-20"><a href="https://id.jobsdb.com/id-id/resources/lulusan-baru">Lulusan Baru</a></li>
+<li id="menu-item-18" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor menu-item-18"><a href="https://id.jobsdb.com/id-id/resources/fokus-industri">Fokus Industri</a></li>
+<li id="menu-item-19" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-19"><a href="https://id.jobsdb.com/id-id/resources/kolom-pencari-kerja">Kolom Pencari Kerja</a></li>
+<li id="menu-item-17" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-17"><a href="https://id.jobsdb.com/id-id/resources/berita-terbaru-jobsdb">Berita Terbaru jobsDB</a></li>
+<li id="menu-item-21" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-21"><a href="https://id.jobsdb.com/id-id/resources/panduan-di-tempat-kerja">Panduan di Tempat Kerja</a></li>
+<li id="menu-item-16" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16"><a href="https://id.jobsdb.com/id-id/resources/zona-hr">Zona HR</a></li>
+</ul></div>		</nav><!-- #site-navigation -->
+    </header>
+    	<div id="main" class="wrapper">
+<div class="breadcrumb"><p id="breadcrumbs">
+
+		<span xmlns:v="http://rdf.data-vocabulary.org/#">
+			<span typeof="v:Breadcrumb"><a href="https://id.jobsdb.com/id-id/career-recruitment-advice" rel="v:url" property="v:title">Tips Dunia Kerja</a></span> &gt; <span typeof="v:Breadcrumb"><a href="https://id.jobsdb.com/id-id/resources/fokus-industri" rel="v:url" property="v:title">Fokus Industri</a></span> &gt; <span typeof="v:Breadcrumb"><a href="https://id.jobsdb.com/id-id/resources/fokus-industri/pemasaran-humas" rel="v:url" property="v:title">Pemasaran &amp; Humas</a></span> &gt; <span typeof="v:Breadcrumb"><strong class="breadcrumb_last" property="v:title">Tips Menjadi Seorang Marketing Yang Handal</strong></span>
+		</span>
+</p></div>
+
+
+	<div id="primary" class="site-content pane-primary">
+    <!-- single pre-header -->
+      <div class="pre-header">
+                <h1 class="entry-title">Tips Menjadi Seorang Marketing Yang Handal</h1>
+              </div>
+    <!-- #single pre-header -->
+		<div id="content" role="main" class="primary-single" rel="single">
+
+			
+
+      
+				
+	<article id="post-31" class="post-31 post type-post status-publish format-standard has-post-thumbnail hentry category-pemasaran-humas tag-dunia-kerja tag-fokus-industri-2 tag-marketing-communication tag-tips-karir primary-content" rel="content">
+		<header class="entry-header">
+                  
+						<div class="entry-title">Tips Menjadi Seorang Marketing Yang Handal</div>
+			 
+     
+      
+		</header><!-- .entry-header -->
+
+
+
+				
+		
+		<div class="addthis_sharing_toolbox"></div> <?php // layout is decided by javascript which is addthis provided ?>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56d566b5b8eb21ed"></script>
+	<script type="text/javascript">var addthis_config = { data_track_addressbar:false, ui_508_compliant: true, data_track_clickback: true, data_ga_tracker: "UA-2012489-1", ui_cobrand: "JobsDB.com" };</script>		
+		<div class="entry-content">
+			<div class="note_content text_align_ltr direction_ltr"><p style="text-align: justify" align="justify">Marketing, mungkin ketika Anda membaca ataupun mendengar kata ini langsung terbayang dipikiran bahwa Marketing itu adalah <i>salesman</i> dan ,<i>saleswoman,</i> yang sering Anda lihat dimana pun yang menawarkan produk barang maupun pun jasa dari berbagai macam perusahaan. Marketing adalah ujung tombak yang menjadikan suatu perusahaan akan meraih kesuksesan atau kemunduran. Marketing mempunyai tugas utama, yaitu menjual produk atau jasa dari suatu perusahaan yang mempunyai target pasar sesuai dengan yang telah ditentukan oleh perusahaan tersebut.<span id="more-31"></span></p>
+<p style="text-align: justify" align="justify"><a href="https://id.jobsdb.com/id-id/articles/tips-menjadi-seorang-marketing-yang-handal"><img src="https://id.content.jobsdbcdn.com/id-id/wp-content/uploads/sites/3/2014/07/Tips-Menjadi-Marketing-Handal.png" alt="Tips Menjadi Marketing  Handal" class="aligncenter size-full wp-image-2609" height="341" width="742" /></a>Banyak yang mengatakan bahwa apabila Anda pernah <b><a href="http://id.jobsDB.com">kerja</a></b> sebagai Marketing disuatu perusahaan, maka Anda akan memiliki lebih besar jiwa semangat juang dalam menghadapi kerasnya kehidupan didunia ini. Marketing saat ini sesungguhnya sudah mulai gencar didunia <i>online,</i> oleh karena itu disebut sebagai Marketing Online. Akan tetapi, prinsip dasarnya pun sama yaitu menjual produk atau jasa dari suatu perusahaan dengan target yang telah ditentukan.</p>
+<h2 style="text-align: justify" align="justify">Simak Tips Menjadi Marketing Handal Berikut Ini :</h2>
+<p style="text-align: justify" align="justify"><b>Kenali market Anda.</b> Pada segmen apa Anda ingin memasarkan produk atau jasa tersebut, dan siapa saja yang menjadi sasaran jual Anda. Pastikan Anda menjual produk atau jasa pada orang yang tepat.</p>
+<p style="text-align: justify" align="justify"><b><i>Have a good appearance.</i></b> Anda tidak pernah tahu dimana dan kapan Anda akan bertemu dengan calon <i>client</i> Anda. Kesan pertama akan terlihat dari penampilan Anda. Berikanlah kesan baik dan meyakinkan ketika target melihat Anda, karena dengan penampilan Anda yang nampak rapih dan meyakinkan maka target Anda akan menilai bahwa produk atau jasa yang ditawarkan memiliki kualitas yang baik.</p>
+<p style="text-align: justify" align="justify"><b>Perluaslah koneksi atau kenalan Anda.</b> Kembangkan sayap Anda, jangan hanya terbatas lingkup kecil saja. Perluas wawasan Anda untuk memasuki dunia yang belum pernah Anda tahu. Semakin banyak koneksi dan wawasan yang Anda miliki maka semakin besar kesempatan Anda untuk mendapatkan <i>client</i> baru.</p>
+<p style="text-align: justify" align="justify"><b>Kuasai produk atau jasa yang ditawarkan (product knowledge).</b> Bagaimana mungkin Anda menawarkan produk atau jasa yang ditawarkan kepada calon <i>client</i> tapi Anda belum menguasai secara penuh mengenai keunggulan, kekurangan, harga, kualitas, target konsumen atau <i>client,</i> dan hal lainnya.</p>
+<p style="text-align: justify" align="justify"><b>Keluar dari <i>comfort zone</i>. </b>Jangan pernah merasa bahwa yang Anda raih saat ini sudah cukup memuaskan. Anda bekerja dengan target, jika Anda bisa untuk mendapatkan yang lebih maka tidak ada alasan bagi Anda untuk berhenti. Beranikan diri Anda untuk melangkah keluar dari zona nyaman untuk mendapatkan tantangan baru, misalnya mendapatkan <i>client</i> dari kalangan yang pernah Anda masuki sebelumnya. Hal ini akan menuntut Anda untuk memiliki kemampuan kecepatan beradaptasi.</p>
+<p style="text-align: justify" align="justify"><b>Ciptakan antusiasme dalam diri Anda.</b> Menciptakan antusiasme dibutuhkan usaha dan kerja keras, intensionalitas, dan tindakan. Antusiasme adalah tindakan atau aksi bukan hanya sebuah cita-cita. Maka berusahalah untuk mewujudkan apa yang sudah Anda cita-citakan.</p>
+<p style="text-align: justify" align="justify"><b>Catat testimonial</b>. <i>Client</i> Anda merasa puas dengan produk atau jasa yang Anda jual, catat testimoni dari mereka. Sebuah testimoni sangat berarti sebagai bukti keunggulan produk Anda. Mereka mungkin akan mengatakan hal-hal yang tidak pernah terpikirkan oleh Anda.</p>
+<p style="text-align: justify" align="justify"><b>Bergulat dengan kenyataan. </b>Dunia Marketing adalah dunia yang penuh dengan persaingan dalam hal apa pun, oleh karena itu Anda harus memiliki mental yang sangat kuat. Penawaran yang Anda ajukan tidak selalu dapat diterima oleh <i>client.</i> Penolakan merupakan hal yang sudah wajar dalam dunia Marketing, maka dibutuhkan kesabaran dan ketahanan mental yang ekstra. Tetap konsisten dalam <b><a href="http://id.jobsDB.com">Pekerjaan</a></b> dan pantang menyerah adalah kunci kesuksesan Anda.</p>
+<p style="text-align: justify" align="justify"><p class="highlight-box">Temukan kesempatan baru untuk anda. Lihat semua yang terbaru <a href="https://id.jobsdb.com/id/id/Search/FindJobs?KeyOpt=COMPLEX&JSRV=1&RLRSF=1&JobCat=175">Pemasaran / Hubungan Masyarakat (Humas) pekerjaan</a></p></p>
+</div>					</div><!-- .entry-content -->
+		
+    
+		<footer class="entry-meta">
+
+            <div class="rs_comment-wrap">
+			   <div id="fb-root"></div>
+	<script>	
+		
+	(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+   <fb:comments href="http://id.jobsdb.com/id-id/shorten/?p=31" numposts="5" colorscheme="light" data-width="100%"></fb:comments>	
+            </div>
+            <div class="rs_meta-wrap">
+			<div class="postmeta-wrap">Posted in <a href="https://id.jobsdb.com/id-id/resources/fokus-industri/pemasaran-humas" title="View all posts in Pemasaran &amp; Humas" rel="category tag">Pemasaran &amp; Humas</a> by <span class="author vcard"><span class="fn">jobsDB</span></span> on <time class="entry-date updated" datetime="2014-07-30T08:29:29+00:00">July 30, 2014</time>.</div> <div class="tag-wrap"><a class="tag-link" href="https://id.jobsdb.com/id-id/tags/dunia-kerja">Dunia Kerja</a><a class="tag-link" href="https://id.jobsdb.com/id-id/tags/fokus-industri-2">fokus industri</a><a class="tag-link" href="https://id.jobsdb.com/id-id/tags/marketing-communication">Marketing Communication</a><a class="tag-link" href="https://id.jobsdb.com/id-id/tags/tips-karir">tips karir</a></div>			
+						</div>
+
+		</footer><!-- .entry-meta -->
+	</article><!-- #post -->
+
+				<nav class="nav-single">
+                    <h3 class="assistive-text">Post navigation</h3>
+                    <div class="nav-previous"></div>
+                    <div class="nav-next"><a href="https://id.jobsdb.com/id-id/articles/profesi-seorang-jubir-president" rel="next"><span class="meta-nav"><span class="meta-nav_txt-f">Profesi Seorang Jubir Presiden</span><span class="meta-nav_txt-m">Newer post</span></span></a></div>
+				</nav>
+				
+				<!-- .nav-single -->
+
+				
+			
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area pane-secondary" role="complementary" rel="sidebar">
+					<aside id="jobsdbrecentpostwidget-2" class="widget-1 widget-first widget-odd widget widget_jobsdbrecentpostwidget">		<h3 class="widget-title">Artikel Terbaru</h3>		<ul>
+					<li>
+				<a onmouseover="mouseoverRecentPost(this,'#f7a940')" onmouseout='mouseoutRecentPost(this)' href="https://id.jobsdb.com/id-id/articles/networking-dengan-cara-yang-benar-6-tip-yang-akan-bekerja-untuk-karirmu">Networking Dengan Cara yang Benar: 6 Tip yang Akan Bekerja Untuk Karirmu</a>
+						</li>
+					<li>
+				<a onmouseover="mouseoverRecentPost(this,'#c1deb9')" onmouseout='mouseoutRecentPost(this)' href="https://id.jobsdb.com/id-id/articles/alasan-umum-mengapa-kamu-tidak-bisa-menabung-dan-cara-mengatasinya">Alasan Umum Mengapa Kamu Tidak Bisa Menabung dan Cara Mengatasinya</a>
+						</li>
+					<li>
+				<a onmouseover="mouseoverRecentPost(this,'#c1deb9')" onmouseout='mouseoutRecentPost(this)' href="https://id.jobsdb.com/id-id/articles/7-cara-untuk-tetap-termotivasi-di-tempat-kerja-saat-ingin-berhenti">7 Cara Untuk Tetap Termotivasi di Tempat Kerja Saat Ingin Berhenti</a>
+						</li>
+					<li>
+				<a onmouseover="mouseoverRecentPost(this,'#f7a940')" onmouseout='mouseoutRecentPost(this)' href="https://id.jobsdb.com/id-id/articles/5-tren-format-resume-baru-untuk-membedakanmu-dari-yang-lain-di-tahun-2018">5 Tren Format Resume Baru Untuk Membedakanmu Dari Yang Lain di Tahun 2018</a>
+						</li>
+					<li>
+				<a onmouseover="mouseoverRecentPost(this,'#f7a940')" onmouseout='mouseoutRecentPost(this)' href="https://id.jobsdb.com/id-id/articles/karier-apa-yang-cocok-untuk-saya-6-prinsip-untuk-menemukan-panggilan-dirimu">Karier Apa yang Cocok Untuk Saya? 6 Prinsip Untuk Menemukan Panggilan Dirimu</a>
+						</li>
+				</ul>
+		</aside>		<aside id="text-2" class="widget-2 widget-even widget_promote widget widget_text">			<div class="textwidget"><div id="side-banner">
+<iframe id="side-banner-iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="width:300px"></iframe>
+</div>
+<script type="text/javascript">
+var sideBanner = new IFrameAdBannerManagerClass(["side-banner-iframe"],["/id-id/wp-content/themes/jobsdb/placeholder/id/side-banner3.html"], "side-banner" , null);
+</script>
+</div>
+		</aside><aside id="simpletags-2" class="widget-3 widget-odd widget widget-simpletags"><h3 class="widget-title">Tag cloud</h3>
+<!-- Generated by Simple Tags 2.3.2 - http://wordpress.org/extend/plugins/simple-tags -->
+	<div class="st-tag-cloud">
+	<a href="https://id.jobsdb.com/id-id/tags/lingkungan" id="tag-link-218" class="st-tags t3" title="64 topics" rel="tag" style="font-size:14.67px; color:#298eb9;">Lingkungan</a>
+<a href="https://id.jobsdb.com/id-id/tags/dunia-kerja" id="tag-link-588" class="st-tags t1" title="50 topics" rel="tag" style="font-size:12px; color:#298eb9;">Dunia Kerja</a>
+<a href="https://id.jobsdb.com/id-id/tags/pribadi" id="tag-link-375" class="st-tags t3" title="71 topics" rel="tag" style="font-size:14.67px; color:#298eb9;">Pribadi</a>
+<a href="https://id.jobsdb.com/id-id/tags/kesehatan" id="tag-link-185" class="st-tags t1" title="49 topics" rel="tag" style="font-size:12px; color:#298eb9;">Kesehatan</a>
+<a href="https://id.jobsdb.com/id-id/tags/umum" id="tag-link-322" class="st-tags t1" title="52 topics" rel="tag" style="font-size:12px; color:#298eb9;">Umum</a>
+<a href="https://id.jobsdb.com/id-id/tags/tips-kerja" id="tag-link-564" class="st-tags t5" title="86 topics" rel="tag" style="font-size:17.33px; color:#298eb9;">tips kerja</a>
+<a href="https://id.jobsdb.com/id-id/tags/pengembangan-karir" id="tag-link-22" class="st-tags t4" title="73 topics" rel="tag" style="font-size:16px; color:#298eb9;">Pengembangan Karir</a>
+<a href="https://id.jobsdb.com/id-id/tags/cari-kerja" id="tag-link-570" class="st-tags t1" title="45 topics" rel="tag" style="font-size:12px; color:#298eb9;">Cari Kerja</a>
+<a href="https://id.jobsdb.com/id-id/tags/wawancara" id="tag-link-168" class="st-tags t3" title="71 topics" rel="tag" style="font-size:14.67px; color:#298eb9;">Wawancara</a>
+<a href="https://id.jobsdb.com/id-id/tags/kantor" id="tag-link-585" class="st-tags t2" title="57 topics" rel="tag" style="font-size:13.33px; color:#298eb9;">kantor</a>
+<a href="https://id.jobsdb.com/id-id/tags/inspirasi" id="tag-link-498" class="st-tags t4" title="77 topics" rel="tag" style="font-size:16px; color:#298eb9;">Inspirasi</a>
+<a href="https://id.jobsdb.com/id-id/tags/pendidikan" id="tag-link-78" class="st-tags t1" title="49 topics" rel="tag" style="font-size:12px; color:#298eb9;">Pendidikan</a>
+<a href="https://id.jobsdb.com/id-id/tags/pengembangan-diri" id="tag-link-500" class="st-tags t3" title="66 topics" rel="tag" style="font-size:14.67px; color:#298eb9;">Pengembangan Diri</a>
+<a href="https://id.jobsdb.com/id-id/tags/karir" id="tag-link-567" class="st-tags t3" title="70 topics" rel="tag" style="font-size:14.67px; color:#298eb9;">karir</a>
+<a href="https://id.jobsdb.com/id-id/tags/kerja" id="tag-link-573" class="st-tags t10" title="124 topics" rel="tag" style="font-size:24px; color:#298eb9;">kerja</a></div>
+
+</aside><aside id="web_api_widget-2" class="widget-4 widget-even widget widget_web_api_widget">
+<div class="jobalert-widget">
+    <h3 class="widget-title">Tersedia lowongan pekerjaan baru setiap harinya. Jangan sampai terlewatkan</h3>
+    <form action="https://id.jobsdb.com/ID/id/JobAlert/JobAlertCreation?ja_create_src=27" id="createAlertWidgetForm" method="post">
+        <div class="frm-section fn-form-email">
+            <fieldset class="frm-gp box fn-item-email">
+                <div class="frm-elmt w-full" id="jobalert-widget-inputWrap">
+                    <input id="job-alert-email-input" name="Email" type="text" value="" />
+                </div>
+                <div class="formMessage" id="jobalert-widget-errorMsg" style="display:none;"">
+                    <div class="formWarning frm-elmt-errmsg">
+                        <div class="error formError"></div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="frm-section fn-steps-action">
+            <fieldset class="frm-gp frm-action">
+                <button class="button-primary mini-jobalert-create" >Buat job alert</button>
+            </fieldset>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+
+    var emailAddressInput = $("#job-alert-email-input");
+    var emailAddressErrorMsg = $("#jobalert-widget-errorMsg");
+    var createAlertWidgetForm = $("#createAlertWidgetForm");
+
+    function ResetValidationErrorMessage() {
+        emailAddressErrorMsg.hide();
+        $("#jobalert-widget-inputWrap").removeClass("frm-error");
+    }
+
+    function CreateJobAlert(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var inputWrap = $("#jobalert-widget-inputWrap");
+        var emailAddress = emailAddressInput.val();
+
+        var isEmpty = false;
+        var isMaxLengthExceeded = emailAddress.length > 50;
+        var validEmail = (emailAddress.match(/^((([!#$%&'*+\-=?^_`{|}~\w])|([!#$%&'*+\-=?^_`{|}~\w][!#$%&'*+\-=?^_`{|}~\.\w]{0,}[!#$%&'*+\-=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/) != null);
+
+        var msg = null;
+        if (isEmpty) {
+            msg = "Masukkan email Anda";
+        }
+        else if (isMaxLengthExceeded) {
+            msg = "Harap gunakan email yang berisi 50 karakter atau kurang.";
+        }
+        else if (!validEmail) {
+            msg = "Format email Anda tidak benar. Silahkan coba lagi.";
+        }
+
+        var valid = !isEmpty && validEmail && !isMaxLengthExceeded;
+        if (valid) {
+            emailAddressErrorMsg.hide();
+            inputWrap.removeClass("frm-error");
+            createAlertWidgetForm.submit();
+        }
+        else {
+            emailAddressErrorMsg.find(".formError").text(msg);
+            emailAddressErrorMsg.show();
+            inputWrap.addClass("frm-error");
+        }
+    }
+
+    $(".mini-jobalert-create").click(function (event) {
+        CreateJobAlert(event);
+    })
+
+    emailAddressInput.keydown(function (e) {
+        if (e.which == 13) {
+            CreateJobAlert();
+        } else {
+            ResetValidationErrorMessage();
+        }
+    });
+
+    function InitPlaceHolder() {
+        emailAddressInput.Placeholder("Masukkan email anda", { 'left': '17px' });
+    }
+
+    function GetJSDetailInfoSuccess(responseData) {
+        var dataObject = eval("(" + responseData + ")");
+        var email = dataObject.JSEmailAddress;
+
+        emailAddressInput.val(email);
+        emailAddressInput.attr("disabled", "disabled");
+        emailAddressInput.trigger("updateStyle");
+    }
+
+    function IncludeLibrary() {
+        var jsLibraryList = ["jq.placeholder.js", "Controllers/JobSeekerController_GetJobSeekerDetailInfoJSON.js"];
+
+        JobsDB_System.IncludeJsWithAction(jsLibraryList, function () {
+            InitPlaceHolder();
+
+            var isLoggedIn = JobsDB_System_Authentication.GetIdAndTicket().IsJobSeeker;            if (isLoggedIn) {
+                var ajax = JobsDB_Controllers_JobSeekerController_GetJobSeekerDetailInfoJSONActionClass.ObjectFactory.getInstance();;
+                ajax.addOnSuccessListener(GetJSDetailInfoSuccess);
+                ajax.submitWithResultInJson();
+            }
+        });
+    }
+
+    IncludeLibrary();
+});
+</script></aside><aside id="web_api_widget-4" class="widget-6 widget-even widget widget_web_api_widget">
+</aside><aside id="text-3" class="widget-7 widget-last widget-odd widget widget_text">			<div class="textwidget"><style>.lang-id .db16 .db16-menu ul.hirer a{padding:8px 15px !important;line-height:1  !important;}</style></div>
+		</aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+</div><!-- #page -->
+
+
+<div class="legacy">
+
+<a name="footer"></a>
+<footer class="full" id="footer">
+    <div class="full-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row full-footer-panel">
+                        <div class="hidden-xs col-sm-6 col-md-12">
+                            <h2 class="footer-logo"><a href="http://www.jobsdb.com" title="jobsDB.com Home"><span>jobsDB.com</span></a></h2>
+                        </div>
+                        <div class="col-sm-6 col-md-12">
+                            <div class="footer-contact-info">
+                                
+                                <p>
+                                    <p>Informasi Pemasangan Iklan:</p><p>Telp.: +62 21 3002 8899 <br />Fax: +62 21 3002 8888 / +62 21 5795 7733 <em><br/>(Mon - Fri, 8:00am - 5:00pm)</em><br />Email: <a href="/cdn-cgi/l/email-protection#8bc8d8cbe1e4e9f8cfc9a5e8e4a5e2ef"><span class="__cf_email__" data-cfemail="82c1d1c2e8ede0f1c6c0ace1edacebe6">[email&#160;protected]</span></a></p>
+                                </p>
+                                
+                            </div>
+                            <div class="footer-social">
+                                
+
+
+<menu class="box">
+    
+        <li>
+          
+            <a href="https://plus.google.com/111611346438127922663/posts" class="social-icon social-googleplus" onclick="return PopupInvoker(this);">
+            <span>Google Plus</span></a>
+          
+        </li>
+        
+        <li>
+          
+            <a href="https://www.facebook.com/jobsDBIndonesia.FP/" class="social-icon social-facebook" onclick="return PopupInvoker(this);">
+            <span>Facebook</span></a>
+          
+        </li>
+        
+        <li>
+          
+            <a href="https://twitter.com/JobsDBIndonesia" class="social-icon social-twitter" onclick="return PopupInvoker(this);">
+            <span>Twitter</span></a>
+          
+        </li>
+        
+        <li>
+          
+            <a href="http://jobsdb-indonesia.blogspot.com/" class="social-icon social-blogger" onclick="return PopupInvoker(this);">
+            <span>Blogger</span></a>
+          
+        </li>
+        
+        <li>
+          
+            <a href="http://id.jobsdb.com/ID/en/Rss/RenderJobFunctionRssIndex" class="social-icon social-rss" onclick="return PopupInvoker(this);">
+            <span>RSS</span></a>
+          
+        </li>
+        
+</menu>   
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/d07b1474/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+    function BindClickEventForSocialMediaIcons() {
+        
+                $("#SocialMedia_1297").click(function(){_gaq.push(['_trackEvent', 'Google Plus', 'Submit']);});
+        
+                $("#SocialMedia_1299").click(function(){_gaq.push(['_trackEvent', 'Facebook', 'Submit']);});
+        
+                $("#SocialMedia_1301").click(function(){_gaq.push(['_trackEvent', 'Twitter', 'Submit']);});
+        
+                $("#SocialMedia_1303").click(function(){_gaq.push(['_trackEvent', 'Blogger', 'Submit']);});
+        
+                $("#SocialMedia_1305").click(function(){_gaq.push(['_trackEvent', 'RSS', 'Submit']);});
+        
+    }
+    BindClickEventForSocialMediaIcons();
+</script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <dl class="footer-list first">
+                                <dt>Pencari Kerja</dt>
+                                <dd><a href="https://id.jobsdb.com/id/id/browse">Daftar Pekerjaan</a></dd>
+                                <dd><a href="/ID/id/Resumes/ResumeIndex">Daftarkan CV</a></dd>
+                                <dd><a id="jobAlertCreateFooter" href="/ID/id/JobAlert/JobAlertCreation">Job Alerts</a></dd>
+                                <dd><a href="https://id.jobsdb.com/id/id/MyJobsDB">My jobsDB</a></dd>
+                                
+                            </dl>
+                        </div>
+                        <div class="col-xs-6">
+                            <dl class="footer-list">
+                                <dt>Perusahaan</dt>
+                                <dd><a href="/ID/id/Home/EmployerIndex">Tayangkan Iklan</a></dd>
+                                
+                                <dd><a href="/ID/id/StaticContentFullContainer/EM/FindTalent.htm">Cari Kandidat</a></dd>
+                                <dd><a href="/ID/id/StaticContent/AboutUs/Products.htm" class="popupInvoker">Beriklan Bersama Kami</a></dd>
+                                
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <dl class="footer-list">
+                                <dt>Tentang Kami</dt>
+                                <dd><a href="https://id.jobsdb.com/id-id/pages/aboutus" class="popupInvoker">Tentang jobsDB</a></dd>
+                                <dd><a href="/ID/id/StaticContentFullContainer/AboutUS/faq/index.htm">FAQ</a></dd>
+                                <dd><a href="/ID/id/Search/FindJobs?PN=JobListing&Companies=%22jobsDB%22"><span class="__cf_email__" data-cfemail="de95bfacb7ac9eb4b1bcad9a9c">[email&#160;protected]</span></a></dd>
+                                <dd><a href="https://id.jobsdb.com/id-id/pages/regional-coverage" class="popupInvoker">Hubungi Kami</a></dd>
+                            </dl>
+                        </div>
+                        <div class="col-xs-6">
+                            <dl class="footer-list">
+                                <dt>Perkakas</dt>
+                                <dd>
+                                    <a href="https://m.jobsdb.co.id/id-id" onclick="RedirectToMobileVersion('https://m.jobsdb.co.id/id-id');return false">Versi Mobile</a></dd>
+                                <dd><a href="/ID/id/Rss/RenderJobFunctionRssIndex">RSS</a></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                
+
+<div class="col-md-10 col-md-offset-1 text-center">
+    <dl class="footer-list footer-list-horizontal">
+        <dt>Partner Internasional</dt>
+        <dd><a href="http://www.babajob.com" title="BabaJob (India)">BabaJob (India)</a></dd>
+<dd><a href="http://www.bdjobs.com" title="Bdjobs (Bangladesh)">Bdjobs (Bangladesh)</a></dd>
+<dd><a href="http://www.brightermonday.com" title="Brighter Monday (East Africa)">Brighter Monday (East Africa)</a></dd>
+<dd><a href="http://www.catho.com.br" title="Catho (Brazil)">Catho (Brazil)</a></dd>
+<dd><a href="http://www.jobberman.com" title="Jobberman (West Africa)">Jobberman (West Africa)</a></dd>
+<dd><a href="http://www.jobstreet.com" title="JobStreet (S.E. Asia)">JobStreet (S.E. Asia)</a></dd>
+<dd><a href="https://id.jora.com" title="Jora (Indonesia)">Jora (Indonesia)</a></dd>
+<dd><a href="http://www.manager.com.br" title="Manager (Brazil)">Manager (Brazil)</a></dd>
+<dd><a href="https://www.occ.com.mx" title="OCC Mundial (Mexico)">OCC Mundial (Mexico)</a></dd>
+<dd><a href="http://www.seamanjobsite.com" title="Seaman Jobsite (Philippines)">Seaman Jobsite (Philippines)</a></dd>
+<dd><a href="http://www.seek.com.au" title="SEEK (Australia)">SEEK (Australia)</a></dd>
+<dd><a href="http://www.workabroad.ph" title="Work Abroad (Philippines)">Work Abroad (Philippines)</a></dd>
+<dd><a href="https://www.workana.com" title="Workana">Workana</a></dd>
+<dd><a href="http://www.zhaopin.com" title="Zhaopin (China)">Zhaopin (China)</a></dd>
+
+    </dl>
+</div>
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <div class="line"></div>
+            <div class="pull-right">
+                
+                <a href="https://id.jobsdb.com/id-id/pages/terms/privacy-policy" target="_blank">Pernyataan Privasi</a><span>&nbsp; |&nbsp;</span>
+                <a href="https://id.jobsdb.com/id-id/pages/terms/terms-conditions" target="_blank">Syarat dan ketentuan</a><span>&nbsp; |&nbsp;</span>
+                <a href="https://id.jobsdb.com/id/id/sitemap">Sitemap</a>
+            </div>
+            <div class="pull-left">Hak Cipta© 1998-2018, jobsDB. Semua Hak Dilindungi.</div>
+        </div>
+    </div>
+</footer>
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/d07b1474/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+    $(document).ready(function () {
+        $("#jobAlertCreateFooter").click(function () {
+            this.href = JobsDB_System.CheckAndAppendQueryParameter(this.href, "ja_create_src", "3");
+            JobsDB_Common.AddToOmnitureCarry("event81", "eVar61", "Footer");
+            return JobsDB_Common.DelayExec(this);
+        });
+    });
+</script>
+
+</div>
+
+ <script type="text/javascript">
+ //<![CDATA[
+    function TriggerSetWindowLocation(url) {
+        var user = JobsDB_System_Authentication.GetIdAndTicket();
+        if (user.IsJobSeeker && g_dotComDomain != window.location.host) {
+            var ticket = $.cookie(getAuthenJsTicketKey);
+            
+            var authCookieQuery = getAuthenUserJsIdKey + "=" + user.Id + "&" + getAuthenJsTicketKey + "=" + ticket;
+            if (url.indexOf("?") > -1) {
+                url = url + "&" + authCookieQuery;
+            }
+            else {
+             url = url + "?" + authCookieQuery;
+            }
+            var newUrl = 'http://' + g_dotComDomain + url;
+            JobsDB_System.FormSubmit(newUrl, 'post')
+        }
+        else {
+            window.location = url;
+        }
+        return false;
+    }
+
+    function UpdateLastLoggedInRecentSearchCookie(){
+        var isLoggedIn = JobsDB_System_Authentication.GetIdAndTicket().IsJobSeeker;            
+        if (isLoggedIn){
+            var showJobAlertBalloonEnhancedSRPCookieName = "ShowJobAlertBalloonEnhancedSRPCookieName";
+            var promoBalloonCookie = $.cookie(showJobAlertBalloonEnhancedSRPCookieName);
+
+            var previousUniqueSearchCriteriaArr = [];
+            var dontShowAgain= false;
+
+            var user = JobsDB_System_Authentication.GetIdAndTicket();
+            var hashedCurrentLoggedInJSID = hex_sha1(user.Id);     
+
+            var expiry = 30;                        
+            var jsonData = {"PreviousUniqueSearchCriteria":previousUniqueSearchCriteriaArr, "DontShowAgain":dontShowAgain, "LastLoggedInJS":hashedCurrentLoggedInJSID};
+            
+            if (promoBalloonCookie!==null){
+                var balloonPromoContent = JSON.parse(promoBalloonCookie);
+
+                previousUniqueSearchCriteriaArr = balloonPromoContent.PreviousUniqueSearchCriteria;
+                dontShowAgain= balloonPromoContent.DontShowAgain;
+                var hashedLastLoggedInJSID = balloonPromoContent.LastLoggedInJS;
+                
+                if (hashedCurrentLoggedInJSID!==hashedLastLoggedInJSID){
+                    // flush the search criteria to reset counter
+                    previousUniqueSearchCriteriaArr = [];
+                }
+                jsonData = {"PreviousUniqueSearchCriteria":previousUniqueSearchCriteriaArr, "DontShowAgain":dontShowAgain, "LastLoggedInJS":hashedCurrentLoggedInJSID};
+            }
+            $.cookie(showJobAlertBalloonEnhancedSRPCookieName, JSON.stringify(jsonData), { expires: expiry, path: '/' });            
+        }
+    }
+    
+    var justClickHeaderLogin = false;
+    function TriggerHeaderLoginPlace() {
+        RefreshHeaderLoginDisplay();        
+        if (userName != null && userName.length > 0) {
+            if(justClickHeaderLogin){
+                
+                var afterLoginSuccessByHeaderControllerResponse = {"Type":0,"CountryCode":"","LanguageCode":"","Webflow":0,"ActionUrl":null,"WebflowAction":2,"JsonData":"","JsonNotificationData":null,"JsonErrorData":null,"Description":"No Description.","EvalScript":null,"NextControllerResponeseDelayTime":0,"NextControllerResponese":null,"IsBlocked":false,"Target":0,"UnBlockingEvent":0,"ContainerWidth":-1,"ContainerHeight":-1,"IsAlwaysPost":false,"IsNormalMemberFristLogin":false}
+                afterLoginSuccessByHeaderControllerResponse.ActionUrl = [null,'MyJobsDB','Index'].join('/');
+                JobsDB_System_Webflow.ControllerResponseExecutor(afterLoginSuccessByHeaderControllerResponse);
+                justClickHeaderLogin = false;
+            }
+        }                   
+    }
+    
+    var isSuspendWelcomeBalloon = false;
+    function ShowWelcomBalloon(data) {
+        if (isSuspendWelcomeBalloon || data == "NoWelcomeBalloon") {
+            return;
+        } else {
+            if (userName != null && userName.length > 0) {
+                var wordings = (data == "AdHocRegistrationSuccess") ? "Hai {0} ! Selamat datang di JobsDB!" : "Hai {0}! Selamat datang kembali di JobsDB!";
+                var msg = wordings.replace("{0}", userName); 
+                HeaderMsgManager.Show(msg);
+            }
+        }
+    }
+
+    
+    JobsDB_System_Messaging.RegisterToListenEvent('RefreshAuthenticationTicket', TriggerHeaderLoginPlace);           
+    JobsDB_System_Messaging.RegisterToListenEvent('RefreshAuthenticationTicket', ShowWelcomBalloon);
+    JobsDB_System_Messaging.RegisterToListenEvent('RefreshAuthenticationTicket', UpdateLastLoggedInRecentSearchCookie);           
+
+    function TriggerRefreshJobApplication()
+    {
+        JobsDB_System_Messaging.PublishEvent('RefreshJobApplication','');
+    }
+            
+    function TriggerRefreshJobSave()
+    {
+        JobsDB_System_Messaging.PublishEvent('RefreshJobSave','');
+    }
+    
+    $("#HeaderLogin").click(function() {
+        
+        var showLoginboxControllerResponse = {"Type":0,"CountryCode":"","LanguageCode":"","Webflow":0,"ActionUrl":null,"WebflowAction":2,"JsonData":"","JsonNotificationData":null,"JsonErrorData":null,"Description":"No Description.","EvalScript":null,"NextControllerResponeseDelayTime":0,"NextControllerResponese":null,"IsBlocked":false,"Target":0,"UnBlockingEvent":0,"ContainerWidth":-1,"ContainerHeight":-1,"IsAlwaysPost":false,"IsNormalMemberFristLogin":false}
+        showLoginboxControllerResponse.ActionUrl = [null,'Login','JobSeekerLogin'].join('/');
+        justClickHeaderLogin = true;
+        
+        
+        if(typeof checkpointControllerResponseExecutorRefreshAuthenticationTicket == 'function'){
+            JobsDB_System_Webflow.DeleteCheckPoint("RefreshAuthenticationTicket",checkpointControllerResponseExecutorRefreshAuthenticationTicket);
+        } 
+        
+        JobsDB_System_Webflow.ControllerResponseExecutor(showLoginboxControllerResponse);                            
+    });
+    
+     function CreateCheckPointForP1Login(){
+        if(typeof checkpointControllerResponseExecutorP1LoginRegister == 'function'){
+            JobsDB_System_Webflow.DeleteCheckPoint('P1LoginRegister');
+        }
+	    var reloadPageControllerResponse = {"Type":0,"CountryCode":"","LanguageCode":"","Webflow":0,"ActionUrl":"","WebflowAction":2,"JsonData":"","JsonNotificationData":null,"JsonErrorData":null,"Description":"No Description.","EvalScript":null,"NextControllerResponeseDelayTime":0,"NextControllerResponese":null,"IsBlocked":false,"Target":0,"UnBlockingEvent":0,"ContainerWidth":-1,"ContainerHeight":-1,"IsAlwaysPost":false,"IsNormalMemberFristLogin":false};
+	    if(typeof(searchInvokeLogic) != "undefined") //handle search result page
+        {
+            reloadPageControllerResponse.ActionUrl = searchInvokeLogic.GetSearchActionUrl();
+        }
+        else if('False'=='True' || 'False'=='True') //@jobseeker login page, change checkpoint to MyJobsDB after login / register
+        {
+            reloadPageControllerResponse.ActionUrl = 'https://id.jobsdb.com/ID/ID/myjobsdb/index';
+        }
+        else
+        {
+	        reloadPageControllerResponse.ActionUrl = window.location.href;
+	    }
+	    
+	    JobsDB_System_Webflow.CreateCheckPoint('P1LoginRegister',reloadPageControllerResponse);                   
+        if(window.frames['JobSearchResultJobAdPreviewIFrame']!=null) //handle job ad detail iframe in SRP
+        {
+            window.frames['JobSearchResultJobAdPreviewIFrame'].JobsDB_System_Webflow.DeleteCheckPoint('P1LoginRegister');
+            window.frames['JobSearchResultJobAdPreviewIFrame'].JobsDB_System_Webflow.CreateCheckPoint('P1LoginRegister',reloadPageControllerResponse);
+        }
+    }
+    
+    $("#Head_Login, .fn-header-canlogin").click(function(event) 
+    {
+        
+            CreateCheckPointForP1Login();
+            $.cookie('FromP1HomepageBanner', null, { path: '/' });
+            $.cookie('IsUsingLoginAndRegPrompt', null, { path: '/' });
+        var homeLogin = ($('body').hasClass('home-index') && $('body').hasClass('logged-out')) ? "#start" : "";
+        	window.location.href = 'https://id.jobsdb.com/id/id/login/jobseekerlogin' +'?from=header' + homeLogin;
+            
+            event.preventDefault();
+            event.stopPropagation();
+        
+        RefreshHeaderLoginDisplay();
+    });
+     
+     $('#JobSeekerRegistrationLink, .fn-header-canreg').click(function(event) {
+        _gaq.push(['_trackEvent', 'JobSeekerRegistration', 'Click']);
+        
+        setTimeout(function() {     //  
+		    CreateCheckPointForP1Login();
+            window.location.href = 'https://id.jobsdb.com/id/id/jobseeker/registration';
+        }, 100);
+        event.preventDefault();
+        event.stopPropagation();
+        $.cookie('FromP1HomepageBanner', null, { path: '/' });
+        $.cookie('IsUsingLoginAndRegPrompt', null, { path: '/' });
+        
+    });
+    
+    function JobSeekerLogOff()
+    {   
+        var currentDomainControllerResponse = {"Type":0,"CountryCode":"","LanguageCode":"","Webflow":0,"ActionUrl":"","WebflowAction":2,"JsonData":"","JsonNotificationData":null,"JsonErrorData":null,"Description":"No Description.","EvalScript":null,"NextControllerResponeseDelayTime":0,"NextControllerResponese":null,"IsBlocked":false,"Target":0,"UnBlockingEvent":0,"ContainerWidth":-1,"ContainerHeight":-1,"IsAlwaysPost":false,"IsNormalMemberFristLogin":false}
+        currentDomainControllerResponse.ActionUrl = [null,'Login','JobSeekerLogoff'].join('/');
+        JobsDB_System_Webflow.ControllerResponseExecutor(currentDomainControllerResponse);
+    }
+    
+    $("#HeaderLogOffLink").click(function()
+    {   
+        try
+        {
+            localStorage.removeItem('JsLatestPosition');
+        }
+        catch(err)
+        {
+        }    
+        JobSeekerLogOff();
+    });
+      
+    function ChangeCountry(country) {
+        var url = $.jqURL.strip({ keys: 'ToCountry' });
+        if(url.indexOf("#") > 0)
+        {
+            url = url.substring(0, url.indexOf("#"));
+        }
+        if (url.indexOf('?') > 0) {
+            url += '&ToCountry=' + encodeURIComponent(country);
+        }
+        else {
+            url += '?ToCountry=' + encodeURIComponent(country);
+        }
+        window.location = url;
+    }
+    
+    function GoToMobileVersion() {
+        var isSitePreferenceSupportedForTheDevice = ("False" == "True");
+
+        if (isSitePreferenceSupportedForTheDevice) {
+            var sitePreferenceCookieName = "JobsDB.SitePreference";
+            var mobilePreferenceCookieValue = "mobile";
+
+            if (JobsDB_Common.CookieEnabled()) {
+                document.cookie = sitePreferenceCookieName + "=" + mobilePreferenceCookieValue + ";path=/;domain=jobsdb.com"
+            }
+        }
+
+        window.open('http://mobile.jobsdb.com/hk/en/Mobile', "", GetPopupWindowSettings());
+    }
+
+    //duplicate function from GoToMobileVersion with target url argument
+    function RedirectToMobileVersion(mobileURL) {
+        var isSitePreferenceSupportedForTheDevice = ("False" == "True");
+
+        if (isSitePreferenceSupportedForTheDevice) {
+            var sitePreferenceCookieName = "JobsDB.SitePreference";
+            var mobilePreferenceCookieValue = "mobile";
+
+            if (JobsDB_Common.CookieEnabled()) {
+                document.cookie = sitePreferenceCookieName + "=" + mobilePreferenceCookieValue + ";path=/;domain=jobsdb.com"
+            }
+        }
+
+        window.open(mobileURL, "", GetPopupWindowSettings());
+    }
+    
+    function ShowRegistrationLayer() {
+        var cr = {"Type":0,"CountryCode":"","LanguageCode":"","Webflow":6,"ActionUrl":null,"WebflowAction":2,"JsonData":null,"JsonNotificationData":null,"JsonErrorData":null,"Description":"No Description.","EvalScript":null,"NextControllerResponeseDelayTime":0,"NextControllerResponese":null,"IsBlocked":false,"Target":0,"UnBlockingEvent":0,"ContainerWidth":-1,"ContainerHeight":-1,"IsAlwaysPost":false,"IsNormalMemberFristLogin":false}
+        cr.ActionUrl = [null,'JobSeeker','MiniProfileRegistration'].join('/');
+        JobsDB_System_Webflow.ControllerResponseExecutor(cr);
+    }
+    
+    function ShowLoginLayer() {
+        var cr = {"Type":0,"CountryCode":"","LanguageCode":"","Webflow":6,"ActionUrl":null,"WebflowAction":2,"JsonData":null,"JsonNotificationData":null,"JsonErrorData":null,"Description":"No Description.","EvalScript":null,"NextControllerResponeseDelayTime":0,"NextControllerResponese":null,"IsBlocked":false,"Target":0,"UnBlockingEvent":0,"ContainerWidth":-1,"ContainerHeight":-1,"IsAlwaysPost":false,"IsNormalMemberFristLogin":false}
+        cr.ActionUrl = [null,'Login','RevampedLoginBoxForJobSeeker'].join('/');
+        JobsDB_System_Webflow.ControllerResponseExecutor(cr);
+    }
+      
+    var jobAlertSavedSuccessMessage = "Sukses! Kami akan mengirimkan {0} pekerjaan ke {1}";
+    function ConstructJobAlertSavedSucceedMessage(emailAddress, jobAlertTitle) {
+            jobAlertSavedSuccessMessage = jobAlertSavedSuccessMessage.replace("{0}", jobAlertTitle);
+            jobAlertSavedSuccessMessage = jobAlertSavedSuccessMessage.replace("{1}", emailAddress);
+            return jobAlertSavedSuccessMessage;
+    }
+
+    function DoActionAfterP1Registration() {
+        var isRegisterFlow; var showPopUp;
+        var cookie = $.cookie('P1CreationClassification'); 
+        if(cookie != null && cookie != '') {
+            var cookieObj = JSON.parse(cookie);
+            showPopUp = cookieObj.ShowPopUp;
+            isRegisterFlow = cookieObj.IsRegisterFlow;
+            
+            $.cookie('P1CreationClassification', null, { path: '/' });
+        }
+    }
+
+    var PromptReference = new function() {
+        var storageName = "JobsDB.HeaderPrompt";
+        var jsInfo = JobsDB_System_Authentication.GetJobSeekerIdAndTicket();
+        var showPopOver = true;
+        var jsId = '';
+        var isBootstrap = $("#js-site-header").data("bootstrap");
+        var tooltipTxt = "Sekarang Anda dapat dengan cepat mengakses profil Anda dengan mengklik nama Anda";
+
+        function prohibitThePromptTrigger() {
+            if(jsInfo != null) { jsId = jsInfo.Id; }
+            $.cookie(storageName, JSON.stringify([{ jobseekerid: jsId, showPop: false }]), {path : '/', expires: 365});
+        }
+        this.prohibitThePromptTrigger = prohibitThePromptTrigger;
+
+        function isShowNewHeaderPrompt() {
+            if(jsInfo != null) { jsId = jsInfo.Id; }
+            var cData = JSON.parse($.cookie(storageName)) || [];
+            if (typeof cData[0] != "undefined") {
+                if(jsId == cData[0].jobseekerid && cData[0].showPop == false) {
+                    return false; 
+                }
+                return true;
+            }   
+            return true;
+        }
+
+        function setPromptDetail() {
+            if(isBootstrap) {
+                setPromptDetailsImpl();
+            }
+            else {
+                JobsDB_System.IncludeJsWithAction("bootstrap-3.2.0.min.js", function () {
+                    setPromptDetailsImpl();
+                });
+            }
+        }
+
+        function setPromptDetailsImpl() {
+            if ($(window).width() >= 768) {
+                $('.navbar-user').popover({
+                    placement: 'left',
+                    trigger: 'manual',
+                    title: '',
+                    content: tooltipTxt,
+                    viewport: { "selector": ".navbar-default-candi", "padding": 0 }
+                }).popover('show').on({
+                    'click': function() {
+                        $(this).popover('destroy')
+                    }
+                });
+            }
+        }
+
+        function showPrompt() {
+            if($('.navbar-user').is(":visible") && isShowNewHeaderPrompt()) {
+                if($('#label_SSOUserName').isOnScreen()) {
+                    setPromptDetail();
+                }
+                else{
+                    $(window).on("scroll", function() {
+                        if($('#label_SSOUserName').isOnScreen() && showPopOver) {
+                            setPromptDetail();
+                            showPopOver = false;
+                        }
+                    });
+                }
+            }
+        }
+        this.showPrompt = showPrompt;
+
+        function bindLoginModuleClickEvent() {
+            $(".dropdown-owner").on("click", ".dropdown-toggle", function(event){
+                PromptReference.prohibitThePromptTrigger();
+            });
+        }
+        this.bindLoginModuleClickEvent = bindLoginModuleClickEvent;
+    } 
+
+    var HeaderMsgManager = new function() {
+        var NormalRemoveTime = 3000;
+        var EarlyRemoveTime = 200;
+        
+        var headerMsgShowing = false;
+        var headerMsgTimer = null;
+        
+        function ClearEarlyRemoveHeaderEvents() {
+            $(document).unbind("scroll", EarlyRemoveMsg);
+            $(document).unbind("click", EarlyRemoveMsg);
+        }
+        
+        function BindEarlyRemoveEvents() {
+            $(document).scroll(EarlyRemoveMsg);
+            $(document).click(EarlyRemoveMsg);           
+        }
+        
+        function RemoveMsg(isRemoveNow) {
+            if (headerMsgShowing) {
+                if (isRemoveNow) {
+                    $("#HeaderMsg").remove();
+                } else {
+                    $("#HeaderMsg").fadeOut(400, function() {
+                        $(this).remove();
+                    });
+                }
+                ClearEarlyRemoveHeaderEvents();
+                headerMsgTimer = null;
+                headerMsgShowing = false;
+            }
+        }
+        
+        function EarlyRemoveMsg() {
+            if (headerMsgTimer) {
+                clearTimeout(headerMsgTimer);
+            }
+            ClearEarlyRemoveHeaderEvents();
+            setTimeout(RemoveMsg, EarlyRemoveTime);
+        }
+        
+        function ShowImpl(msg) {
+            /* BrandedAd have implemented the login function in header, the headerMag will shown in preview, 
+            hide the header msg when jobad is in preview mode (#iFrame)*/
+            if (window.location == window.parent.location) {
+                RemoveMsg(true);
+                var html = '<div id="HeaderMsg" style="display:none" class="header-notifications clearfix"><p>' + msg + '</p></div>';
+                var body = $("body");
+                body.append(html);
+                $("#HeaderMsg").fadeIn("fast");
+                headerMsgTimer = setTimeout(RemoveMsg, NormalRemoveTime);
+                BindEarlyRemoveEvents();
+                headerMsgShowing = true;
+            }
+        }
+        
+        this.Show = function(msg) {
+            ShowImpl(msg);
+        }
+    }
+
+    if(!window.jobsDB.login)
+    {
+        function LoginComponent()
+        {
+            var loginSource = "Others";
+            var sendLinkTrack = true;
+            function TrackLoginSource()
+            {
+                if(sendLinkTrack)
+                {
+                    ClearVars();(function(contextDataJson){var s=s_gi('jobsdb-prd-id');s.linkTrackVars='';s.linkTrackEvents='';s.events='';if(contextDataJson != undefined && contextDataJson != null){for(var i=0; i<contextDataJson.length; i++){s.contextData[contextDataJson[i].key]=contextDataJson[i].val;}}s.tl(s, 'o', "Login from popup");})([{key:"Login.Source", val:loginSource}]);RestoreVars();
+                }
+                else
+                {
+                    var cookieContextObj = JobsDB_Common.GetOmnitureContextDataFromCookie();
+                    if(cookieContextObj  && typeof(cookieContextObj["Login.Source"]) == "undefined" && loginSource != null)
+                    {
+                        JobsDB_Common.AddOmnitureContextDataToCookie("Login.Source", loginSource);
+                    }
+                }
+            }
+            JobsDB_System_Messaging.RegisterToListenEvent('LocalRefreshAuthenticationTicket', TrackLoginSource);
+
+            JobsDB_System_Messaging.RegisterToListenEvent('Login.SetupSource', function(source)
+            {
+                window.console.log(source);
+                loginSource = source;
+                sendLinkTrack = true;
+            });
+
+            JobsDB_System_Messaging.RegisterToListenEvent('Login.SuppressLinkTrack', function(source)
+            {
+                loginSource = source;
+                sendLinkTrack = false;
+            });
+        }
+        $.extend(true, window.jobsDB, {login:new LoginComponent()});
+    }
+
+    if(!window.jobsDB.header)
+    {
+        function JobSeekerHeader()
+        {
+            var header = $("#js-site-header");
+            var isBootstrap = header.data("bootstrap");
+            var currentDropdown = null;
+
+            function hideCurrentDropdown()
+            {
+                if(currentDropdown != null)
+                {
+                    $(currentDropdown).parent().removeClass("open");                
+                    currentDropdown = null;
+                    $("body").unbind('click', hideCurrentDropdown);
+                }
+            }
+
+            if(!isBootstrap)
+            {
+                header.on("click", ".dropdown-toggle", function(event){
+                    event.preventDefault();
+                    event.stopPropagation();
+                    if(currentDropdown != null && currentDropdown != this)
+                    {
+                        $(currentDropdown).parent().removeClass("open");                       
+                    }
+
+                    if($(this).parent().hasClass("open"))
+                    {
+                        hideCurrentDropdown();
+                    }
+                    else
+                    {
+                        currentDropdown = this;
+                        $(this).parent().addClass("open");
+                        $("body").bind('click', hideCurrentDropdown);
+                    }
+                });
+                
+                header.on("click", 'button.navbar-toggle', function(event){
+                    var e=($(this).data("target"));
+                    $(e).slideToggle('fast');
+                });
+            }
+
+            function updateLinksInHeader()
+            {
+                var url = null;
+                if((/android/gi).test(window.navigator.userAgent))
+                {
+                    url = "https://play.google.com/store/apps/details?id=com.jobsdb&referrer=utm_source%3Ddesktop%26utm_campaign%3DDesktop_Header";
+                }
+                else if((/iPhone|iPod|iPad/gi).test(window.navigator.userAgent))
+                {
+                    url = "https://itunes.apple.com/app/apple-store/id414607432?pt=473902&mt=8&ct=Desktop_Header";
+                }
+                
+                if(url)
+                {
+                    header.find(".appDownloadLink").each(function(){
+                        $(this).attr("href", url);
+                    });
+                }
+                else
+                {
+                    header.find(".appDownloadLink").hide();
+                }
+            }
+
+            function removePositionFromLocalStorage()
+            {
+                try
+                {
+                    localStorage.removeItem('JsLatestPosition');
+                }
+                catch(err)
+                {
+                }      
+            }
+
+            function storeToLocalStorage(title)
+            {
+                try
+                {
+                    localStorage.setItem('JsLatestPosition', title);
+                }
+                catch(err)
+                {
+                }      
+            }
+
+            function updateTitleFromLocalStorage()
+            {
+                try
+                {
+                    var title = localStorage.getItem('JsLatestPosition');
+                    updateTitleImpl(title);
+                }
+                catch(err)
+                {
+                }  
+            }
+
+            function updateTitleImpl(title)
+            {
+                if(title && title.length > 0)
+                {
+                    header.find(".JSLatestJobTitle").text(title).show();
+                    storeToLocalStorage(title);
+                }
+                else
+                {
+                    header.find(".JSLatestJobTitle").hide();
+                    removePositionFromLocalStorage();
+                }		
+            }
+
+            function updateImpl(data) {
+                var invitationContainer = header.find(".JsInvitationCount");
+                var template = invitationContainer.data("template");
+
+                if(data.InvitationCount > 0)
+                {
+                    var message = invitationContainer.data("hasInvitation");
+                    var invitationCount = message.replace('{0}', data.InvitationCount);
+                    invitationContainer.html(template + invitationCount);
+                    header.find(".invitation-indicator").addClass("new");
+                }
+                else
+                {
+                    var emptyMessage = invitationContainer.data("whenEmpty");
+                    invitationContainer.html(template + emptyMessage);
+                }
+                updateTitleImpl(data.JobTitle);
+                window.jobsDB.header.showPrompt();
+            }
+
+            function fetchData()
+            {
+                var userName = JobsDB_System_Authentication.GetJsUserName();
+                if (userName != null && userName.length > 0) {
+                    updateTitleFromLocalStorage();
+                    JobsDB_System.IncludeJsWithAction(["Controllers/HomeController_GetUserProfile.js"], function()
+                    {
+                        var ajax = JobsDB_Controllers_HomeController_GetUserProfileActionClass.ObjectFactory.getInstance();
+                        ajax.addOnSuccessListener(updateImpl);
+                        ajax.submitWithResultInJson(); 
+                    });
+                }
+                else
+                {
+                    removePositionFromLocalStorage();
+                }
+            }
+
+            function constructHeaderPrompt() {
+                PromptReference.bindLoginModuleClickEvent();
+                PromptReference.showPrompt();
+            }
+
+            this.refreshHeader = fetchData;
+            this.updateTitle = updateTitleImpl;
+            this.showPrompt = constructHeaderPrompt;
+
+            JobsDB_System_Messaging.RegisterToListenEvent('RefreshAuthenticationTicket', fetchData);
+            updateLinksInHeader();
+        };
+        
+        if($("#js-site-header").length > 0)
+        {
+            $.extend(true, window.jobsDB, {header:new JobSeekerHeader()});
+        }
+    }
+
+     function ClearAuthForSwitchCountry(){
+         if(window.location.hash.substr(1) === 'SwitchCountry'){
+             window.history.pushState("JobsDB Home Page", "", "/"+window.location.href.substring(window.location.href.lastIndexOf('/') + 1).split("?")[0]); 
+         }
+     }
+
+     function getFromOpener(property, defaultVal) {
+         try {
+             if (window.opener && window.opener[property] != undefined && window.opener[property] != null) {
+                 return window.opener[property];
+             }
+             else if (window.parent && window.parent[property] != undefined && window.parent[property] != null)
+             {
+                 return window.parent[property];
+             }
+         } catch(err){}
+         return defaultVal;
+     }
+
+    $(document).ready(function() {
+         RefreshHeaderLoginDisplay();
+         DoActionAfterP1Registration();
+         ClearAuthForSwitchCountry();     
+        
+        if(window.jobsDB.header) {
+            window.jobsDB.header.refreshHeader();
+        }
+        JobsDB_System_Messaging.RegisterToListenEvent("CriteriaDetailsExtraClicked", function(){UpdateBallonPosition(box);});
+    });
+    
+ //]]>   
+</script>
+
+
+
+
+
+<script type="text/javascript">
+  function JobsDB_OmnitureSiteCatalystPageDataFilter(s)
+  {
+    s.contextData['CMS.PostID'] = 'ID_31';
+    s.contextData['CMS.PostTagIDs'] = 'ID_588|ID_641|ID_357|ID_627';
+  }
+</script><script type='text/javascript'>
+//<![CDATA[
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-2012489-1']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_trackPageLoadTime']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl.google-analytics.com/ga.js' : 'https://id.content.jobsdbcdn.com/Content/v322/Javascript/ga.js?v=3/6/2018');
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+//]]>
+</script>
+<script type='text/javascript'>
+var siteCatalystAccID = 'jobsdb-prd-id';
+</script>
+<script type="text/JavaScript" src="https://id.content.jobsdbcdn.com/Content/v322/Javascript/s_code.js"></script>
+<script type="text/JavaScript" src="https://id.content.jobsdbcdn.com/Content/v322/Javascript/abTest.js"></script>
+<script type='text/javascript'>
+//<![CDATA[
+function InitOmnitureSiteCatalyst(s,s_contextData){
+var userInfo = getCookie('JsAccInfo_XX');
+var useInfoObj = (userInfo) ? eval('(' + userInfo + ')') : null; 
+var userid = (useInfoObj) ? useInfoObj.Uid : null;
+if(userid != null){
+s.eVar3 = userid;
+s.eVar53 = userid;
+if(useInfoObj.Usage == 'P') {
+s.eVar4 = 'partial logged in';
+} else {
+s.eVar4 = 'logged in';
+}
+}else{
+s.eVar4 = 'logged out';
+var lastLoginCookie = getCookie('JsLoginTime');var jsid;     if(lastLoginCookie != null) {         var cookieLoginTrackObj = JSON.parse(lastLoginCookie);         jsid = cookieLoginTrackObj.Uid;         if(jsid !=0) {             s.eVar4 = 'member logged out' ;          }     }}
+var utcOffsetMins = 420;
+s.eVar32 = GetCurrentDateTimeTrackingValue(utcOffsetMins);
+if(s.getQueryParam('utm_content') != '') {
+s.contextData['utm_content'] = s.getQueryParam('utm_content');
+}
+s.contextData['Page.LoadTime'] = s_getLoadTime();
+if(s_contextData && Object.prototype.toString.call( s_contextData ) === '[object Array]'){
+for(var i=0;i<s_contextData.length;i++){
+s.contextData[s_contextData[i][0]] = s_contextData[i][1];
+}
+}
+if(typeof JobsDB_Common != 'undefined' && typeof JobsDB_Common.GetOmnitureContextDataFromCookie === 'function')
+{
+    var cookieContextDatas = JobsDB_Common.GetOmnitureContextDataFromCookie();
+    for(var key in cookieContextDatas)
+    {
+        if(cookieContextDatas.hasOwnProperty(key)) {
+            s.contextData[key] = cookieContextDatas[key];
+        }
+    }
+    JobsDB_Common.ClearOmnitureContextDataCookie();
+}
+if(typeof abTest === 'function'){var ab = new abTest(s,'[{"DrawSampleAjaxURL":"/id/en/Home/UpdateProminentPromptTestingGroupValue","CookieExpireMilliseconds":3153600000000.0,"VersionNumber":0,"ABTestKey":"AB.Key","PercentOfB":0.0,"IsDrawFromAjax":true,"UserBaseTestingMethod":false,"SegmentRangeFrom":"1","SegmentRangeTo":"10000","SegmentTestGroupFrom":"5001","SegmentTestGroupTo":"10000","OmnitureA":"1","OmnitureB":"2"}]');}
+s.eVar1 = "ID";
+s.eVar2 = "CMS";
+s.eVar6 = "D=g";
+s.eVar10 = "D=s_vi";
+s.prop6 = "D=v6";
+s.prop10 = "D=v10";
+s.pageName = ["CMS","Article"].join('/');
+// P1 registration status
+var P1RegistrationFromHomepageBannerCookie;
+var isEnableP1HomepageBanner = 'False'; // For P1 Homepage Banner
+var isUsingNewP1HomepageBanner = 'True'; // For P1 Homepage Banner
+if(isEnableP1HomepageBanner === "True" || isUsingNewP1HomepageBanner === "True") {
+   P1RegistrationFromHomepageBannerCookie = getCookie('P1RegistrationSuccessFromHomepageBanner');
+}
+var P1RegistrationCookie = getCookie('P1RegistrationSuccess');
+// cases
+if(P1RegistrationCookie === "True" && P1RegistrationFromHomepageBannerCookie === "True") {
+   s.contextData['JobSeeker.Registration'] = 'Homepage Top Banner';
+   $.cookie('P1RegistrationSuccess', null, { path: '/' });
+   $.cookie('P1RegistrationSuccessFromHomepageBanner', null, { path: '/' });
+}
+else if(P1RegistrationCookie === "True") {
+   s.contextData['JobSeeker.Registration'] = 'Registration';
+   $.cookie('P1RegistrationSuccess', null, { path: '/' });
+}
+if(s.eVar31) {s.eVar31 += isPerformanceAd;}
+//User classification
+var uc_uid; var isHasResumeId; var isHasP1Profile; var userClassificationCookie;
+var visitNumber = s.getVisitNum();
+var languageCodeID = getLanguageID(s.eVar1);
+var loginStatusID = getLoginStatusID(s.eVar4);
+if(loginStatusID == 0 || loginStatusID == 3) {
+   isHasResumeId = 0;
+   isHasP1Profile = 2;
+}else {
+   userClassificationCookie = getCookie('UserClassification');
+   if(userClassificationCookie == null) {
+       ajaxSynchronization("https://id.jobsdb.com/ID/id/JobSeeker/UpdateUserClassificationCookie", false, false, "GET");
+       userClassificationCookie = getCookie('UserClassification');
+   }
+   var cookieObj = JSON.parse(userClassificationCookie);
+   uc_uid = cookieObj.Uid;
+   if(uc_uid != s.eVar3){
+       document.cookie='UserClassification=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+       ajaxSynchronization("https://id.jobsdb.com/ID/id/JobSeeker/UpdateUserClassificationCookie", false, false, "GET");
+       userClassificationCookie = getCookie('UserClassification');
+       cookieObj = JSON.parse(userClassificationCookie);
+   }
+   isHasResumeId = cookieObj.IsHasResume;
+   isHasP1Profile = cookieObj.IsHasP1Profile;
+}
+var zoomRatio = 0;
+if(window.parent.detectZoom != undefined) {
+   zoomRatio = Math.round(window.parent.detectZoom.zoom()*1000)/10;
+}
+s.eVar51 = visitNumber + ":" + languageCodeID + ":" + loginStatusID + ":" + isHasResumeId + ":" + zoomRatio + ":" + isHasP1Profile +":0:0:0:0";
+var userInfo = getCookie('JsAccInfo_XX');
+
+try{
+var flag = true; var uid;
+var encryptedJsId = getQueryString('jsID');
+var lastLoginCookie = getCookie('JsLoginTime');
+if(JobsDB_System_Validator.CheckIsLogined(false) && flag)  {
+   var useInfoObj = (userInfo) ? eval('(' + userInfo + ')') : null; 
+
+   var userid = (useInfoObj) ? useInfoObj.Uid : null;
+
+   if(userid != null)  {
+
+       if(useInfoObj.Usage == 'P') {
+
+          s.contextData['Login.Status'] ='Partial Logged In';
+           } else {
+          s.contextData['Login.Status'] ='Logged In';
+           }
+       if(lastLoginCookie != null) {
+           var cookieObj = JSON.parse(lastLoginCookie);
+           euid = cookieObj.Euid;
+           s.contextData['Candidate.EncryptedID'] = euid ;
+           }
+   }
+} else {
+       if(lastLoginCookie != null) {
+            var cookieObj = JSON.parse(lastLoginCookie);
+            euid = cookieObj.Euid;
+          s.contextData['Candidate.EncryptedID'] = euid ;
+          s.contextData['Login.Status'] ='Member Logged out';
+       } else if (encryptedJsId != '' && encryptedJsId != null )   {
+          s.contextData['Candidate.EncryptedID'] = encryptedJsId;
+          s.contextData['Login.Status'] ='Member Logged out';
+       }   else    {
+          s.contextData['Login.Status'] ='Logged Out';
+       }
+ } 
+         function getQueryString( field ) {
+             var href = window.location.href;
+             var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+             var stringVal = reg.exec(href);
+             return stringVal ? stringVal[1] : '';
+         };
+ } 
+catch(e){ }
+if(typeof ModifyEventJsVal === 'undefined' || ModifyEventJsVal == null){}else{s.events = ModifyEventJsVal;}
+if(typeof JobsDB_OmnitureSiteCatalystPageDataFilter === 'function') 
+ { 
+JobsDB_OmnitureSiteCatalystPageDataFilter(s); 
+ } 
+
+if(typeof AjaxPageName !== 'undefined'){ s.pageName = AjaxPageName; if(typeof OverrideEvar2 !== 'undefined' && OverrideEvar2){s.eVar2 = AjaxPageName; s.prop6 = AjaxPageName;} }
+if(typeof OmnitureNotSentToServer === 'undefined' || OmnitureNotSentToServer){var s_code=s.t();if(s_code)document.write(s_code);}
+if(typeof InitGoogleTagManager === 'function') { InitGoogleTagManager(); }
+}
+if(window.parent && window.parent != window && window.parent.suppressChildOmnitureCodesPageName != undefined){
+suppressOmnitureCodes = (window.parent.suppressChildOmnitureCodesPageName == ["CMS","Article"].join('/'));
+}
+if (typeof suppressOmnitureCodes == 'undefined' || suppressOmnitureCodes == null || (!suppressOmnitureCodes) ){ 
+var sObject = s;
+var sContextDataObj;
+try{sContextDataObj = s_contextData}catch(e){}
+if(typeof jQuery != 'undefined'){ $(document).ready(function() {InitOmnitureSiteCatalyst(sObject,sContextDataObj);}); } 
+else{ window.onload = function (){
+ $(document).ready(function() { 
+ InitOmnitureSiteCatalyst(sObject,sContextDataObj); 
+} ) } 
+} 
+if(typeof JobsDB_Common != 'undefined')
+{
+ JobsDB_Common.ClearPageTrackOmnitureCarry();
+}
+}
+//]]>
+</script>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src='//www.googletagmanager.com/ns.html?id=GTM-QT33' height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript>
+<script>ga_account='UA-2012489-12';
+
+function InitGoogleTagManager(){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-QT33');
+}   
+</script>
+<!-- End Google Tag Manager --><!-- Google Code for Remarketing Tag -->
+<!--------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. 
+See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<style type='text/css'>
+   iframe[name='google_conversion_frame']{ display: none; }
+</style>
+<script type='text/javascript'>
+    /* <![CDATA[ */
+    var google_conversion_id = 1005383362;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+</script>
+<script type='text/javascript' src='//www.googleadservices.com/pagead/conversion.js'></script>
+<noscript>
+    <div style='display:inline;'>
+        <img height='1' width='1' style='border-style:none;' alt='' 
+            src='//googleads.g.doubleclick.net/pagead/viewthroughconversion/1005383362/?value=0&amp;guid=ON&amp;script=0'/>
+    </div>
+</noscript>
+<!-- Begin comScore Tag --><script>var _comscore = _comscore  || [];_comscore.push({c1:'2',c2:'13911996'});( function(){ var s = document.createElement('script'), el = document.getElementsByTagName('script')[0]; s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js'; el.parentNode.insertBefore(s, el);} )();</script><noscript><img src='http://b.scorecardresearch.com/p?c1=2&c2=13911996&cv=2.0&cj=1' /></noscript><!-- End comScore Tag -->
+<script type="text/javascript">
+var flag = true;
+function LoginTrack() {
+var uid; var expiredTime; var euid; var decryptionLink; var link; var updatedLink;
+var encryptedJsId = getQueryString('jsID');
+var lastLoginCookie = getCookie('JsLoginTime');
+if(JobsDB_System_Validator.CheckIsLogined(false) && flag) {
+     if(lastLoginCookie == null) {
+         ajaxSynchronization("https://id.jobsdb.com/ID/id/JobSeeker/LoginTrack?src=1&encryptedJsId=0", true, false, "GET");
+     }
+     else {
+         var cookieObj = JSON.parse(lastLoginCookie);
+         uid = cookieObj.Uid;
+         expiredTime = cookieObj.Time;
+         var isTodayCookie = (new Date(expiredTime).getDate() == new Date().getUTCDate());
+         if(uid != JobsDB_System_Authentication.GetJobSeekerIdAndTicket().Id || !isTodayCookie) {
+             ajaxSynchronization("https://id.jobsdb.com/ID/id/JobSeeker/LoginTrack?src=1&encryptedJsId=0", true, false, "GET");
+         }
+     }
+}
+else{
+         if (encryptedJsId == '' || encryptedJsId == null ){
+             if (lastLoginCookie != null)
+                {
+                  var cookieObj = JSON.parse(lastLoginCookie);
+                  uid = cookieObj.Uid;
+                  expiredTime = cookieObj.Time;
+                  euid = cookieObj.Euid;
+                  var isTodayCookie = (new Date(expiredTime).getDate() == new Date().getUTCDate());
+                  if(uid!=null && !isTodayCookie) 
+                  {
+                     link = "https://id.jobsdb.com/ID/id/JobSeeker/LoginTrack?src=1&encryptedJsId=0";
+                     updatedLink = link.replace('0', euid);
+                     ajaxSynchronization(updatedLink, true, false, "GET");
+                  }
+                }
+         }else{
+                 if (lastLoginCookie == null) {
+                     link = "https://id.jobsdb.com/ID/id/JobSeeker/LoginTrack?src=1&encryptedJsId=0";
+                     updatedLink = link.replace('0', encryptedJsId);
+                     ajaxSynchronization(updatedLink, true, false, "GET");
+                    }
+                 else{
+             	    var cookieObj = JSON.parse(lastLoginCookie);
+                     euid = cookieObj.Euid;
+                     expiredTime = cookieObj.Time;
+                     var isTodayCookie = (new Date(expiredTime).getDate() == new Date().getUTCDate());
+                      if(euid!=encryptedJsId || !isTodayCookie) {
+                         link = "https://id.jobsdb.com/ID/id/JobSeeker/LoginTrack?src=1&encryptedJsId=0";
+                         updatedLink = link.replace('0', encryptedJsId);
+                         ajaxSynchronization(updatedLink, true, false, "GET");
+                     }
+                 }
+         }
+}
+}
+if(typeof JobsDB_System_Validator != 'undefined'){
+LoginTrack();
+if(typeof JobsDB_System_Messaging != 'undefined'){
+JobsDB_System_Messaging.RegisterToListenEvent('LocalRefreshAuthenticationTicket', function() { if(flag) { LoginTrack(); } flag = false; });
+}
+}
+         function getQueryString( field ) {
+             var href = window.location.href;
+             var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+             var stringVal = reg.exec(href);
+             return stringVal ? decodeURIComponent(stringVal[1]) : '';
+         };
+</script>
+
+
+<script type='text/javascript' src='https://id.content.jobsdbcdn.com/id-id/wp-content/themes/jobsdb/js/navigation.js?ver=1.0'></script>
+</div>
+<script src="https://id.jobsdb.com/id-id/wp-content/themes/jobsdb/js/jobsdb_footer_script.js" type="text/javascript"></script>
+
+						<script type="text/javascript">
+					$(document).ready(function(){
+						$("#masthead .nav-menu").scrollLeft($("#masthead .nav-menu .current-post-ancestor").offset().left);$("#footer menu.box").addClass("social-icons");					});
+				</script>
+		</body>
+</html>

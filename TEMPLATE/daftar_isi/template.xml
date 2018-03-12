@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<template category="Own Templates">
+		<name>artikel</name>
+		<file>artikel.sla</file>
+		<tnail>artikeltn.png</tnail>
+		<img>artikel.png</img>
+		<psize>A4, portrait</psize>
+		<color></color>
+		<descr></descr>
+		<usage></usage>
+		<scribus_version>1.4.6</scribus_version>
+		<date>2018-03-12</date>
+		<author></author>
+		<email></email>
+	</template>
+</templates>
